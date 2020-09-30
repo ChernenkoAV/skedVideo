@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -7,6 +8,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.App", "App\skedVideo.App\skedVideo.App.csproj", "{1EB271E7-FFFE-4F10-9C4F-DA7B9AF52782}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.BL", "App\skedVideo.BL\skedVideo.BL.csproj", "{7FB4D757-933D-460E-AEC1-FB92446E3FC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Net", "App\skedVideo.Net\skedVideo.Net.csproj", "{48B8995E-C854-4722-8DBE-C68B8EBCB715}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Common", "App\skedVideo.Common\skedVideo.Common.csproj", "{CED5C772-BB92-43CD-BCA1-8A848EA72BC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +27,14 @@ Global
 		{7FB4D757-933D-460E-AEC1-FB92446E3FC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FB4D757-933D-460E-AEC1-FB92446E3FC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FB4D757-933D-460E-AEC1-FB92446E3FC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B8995E-C854-4722-8DBE-C68B8EBCB715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B8995E-C854-4722-8DBE-C68B8EBCB715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B8995E-C854-4722-8DBE-C68B8EBCB715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B8995E-C854-4722-8DBE-C68B8EBCB715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CED5C772-BB92-43CD-BCA1-8A848EA72BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED5C772-BB92-43CD-BCA1-8A848EA72BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED5C772-BB92-43CD-BCA1-8A848EA72BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED5C772-BB92-43CD-BCA1-8A848EA72BC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -29,5 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1EB271E7-FFFE-4F10-9C4F-DA7B9AF52782} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
 		{7FB4D757-933D-460E-AEC1-FB92446E3FC3} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
+		{48B8995E-C854-4722-8DBE-C68B8EBCB715} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
+		{CED5C772-BB92-43CD-BCA1-8A848EA72BC8} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
 	EndGlobalSection
 EndGlobal
