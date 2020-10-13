@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
+using System.Xml.Linq;
+using Cav;
 using Microsoft.Win32;
 using RestSharp;
 
@@ -15,9 +18,6 @@ namespace skedVideo.Player
         }
 
         private int webPort;
-        private const string control = "command.html";
-        private const string status = "status.html";
-
         private void execCommand(
             string code,
             string varName = null,
@@ -31,7 +31,7 @@ namespace skedVideo.Player
 
             var varCmd = $"{varName}={varValue}";
 
-            var req = new RestRequest(control, Method.POST);
+            var req = new RestRequest("command.html", Method.POST);
             req.AddParameter(String.Empty, $"wm_command={code}&{varCmd}", ParameterType.RequestBody);
             execRequest(req);
         }
@@ -81,21 +81,8 @@ namespace skedVideo.Player
             if (res.StatusCode == 0)
                 Process.Start(Settings.Player_Path, $"\"{path}\"");
 
-            var timeOut = DateTime.Now.AddSeconds(5);
-            req = new RestRequest(Method.GET);
-            req.Timeout = 5000;
-            req.Resource = "status.html";
-            res = execRequest(req);
-
-            while (res.StatusCode != System.Net.HttpStatusCode.OK || res.Content.Contains(", \"N/A\", 0, \"00:00:00\", 0, \"00:00:00\", "))
-            {
-                if (timeOut < DateTime.Now)
-                    throw new TimeoutException("не удалось запустить воспроизведение");
-
-                Thread.Sleep(500);
-
-                res = execRequest(req);
-            }
+            while (GetStatus().State != StateKind.Play)
+            { }
         }
 
         public void GotoPosition(TimeSpan pos)
@@ -118,5 +105,41 @@ namespace skedVideo.Player
             execCommand("804");
         }
 
+        public PlayerStatus GetStatus()
+        {
+            PlayerStatus res = new PlayerStatus();
+
+            var req = new RestRequest(Method.GET);
+            req.Timeout = 5000;
+            req.Resource = "variables.html";
+            var resp = execRequest(req);
+
+            var timeOut = DateTime.Now.AddSeconds(5);
+
+            while (resp.Content.IsNullOrWhiteSpace())
+            {
+                if (timeOut < DateTime.Now)
+                    throw new TimeoutException("не удалось запустить воспроизведение");
+
+                Thread.Sleep(500);
+
+                resp = execRequest(req);
+            }
+
+            var cont = resp
+                .Content
+                .Replace("href=\"favicon.ico\">", "href=\"favicon.ico\"/>")
+                .Replace("href=\"default.css\">", "href=\"default.css\"/>")
+                .Replace("charset=\"utf-8\">", "charset=\"utf-8\"/>");
+
+            var xDoc = XDocument.Parse(cont);
+
+            var elts = xDoc.Descendants();
+            res.FilePath = elts.First(x => x.Attributes().Any(y => y.Value == "filepath")).Value;
+            if (!res.FilePath.IsNullOrWhiteSpace())
+                res.State = (StateKind)Enum.Parse(typeof(StateKind), elts.First(x => x.Attributes().Any(y => y.Value == "state")).Value);
+
+            return res;
+        }
     }
 }
