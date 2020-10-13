@@ -22,5 +22,18 @@
         /// Настройки вебсервера плеера. Принимать запросы только от локалхоста
         /// </summary>
         public const string Player_Setting_WebServerLocalhostOnly = "WebServerLocalhostOnly";
+        /// <summary>
+        /// Настройки вебсервера плеера. Выходить из полноэкранного режима по окончании воспроизведения
+        /// </summary>
+        public const string Player_Setting_ExitFullscreenAtTheEnd = "ExitFullscreenAtTheEnd";
+        /// <summary>
+        /// Настройки вебсервера плеера. Запускать в полноэкранном режиме
+        /// </summary>
+        public const string Player_Setting_LaunchFullScreen = "LaunchFullScreen";
+        /// <summary>
+        /// Настройки вебсервера плеера. Логотип при отсутствии воспроизведения.
+        /// </summary>
+        public const string Player_Setting_LogoFile = "LogoFile";
+
     }
 }

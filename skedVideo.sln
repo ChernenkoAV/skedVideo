@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Common", "App\ske
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Player", "App\skedVideo.Player\skedVideo.Player.csproj", "{9D550FA4-8401-432F-844D-99D8E9966263}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Dal", "App\skedVideo.Dal\skedVideo.Dal.csproj", "{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{9D550FA4-8401-432F-844D-99D8E9966263}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D550FA4-8401-432F-844D-99D8E9966263}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D550FA4-8401-432F-844D-99D8E9966263}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,5 +57,6 @@ Global
 		{48B8995E-C854-4722-8DBE-C68B8EBCB715} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
 		{CED5C772-BB92-43CD-BCA1-8A848EA72BC8} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
 		{9D550FA4-8401-432F-844D-99D8E9966263} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
+		{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
 	EndGlobalSection
 EndGlobal

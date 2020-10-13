@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading;
 
 namespace skedVideo.BL
@@ -13,11 +12,7 @@ namespace skedVideo.BL
 
         public static void StartApp(CancellationToken token, EventLog eventLog)
         {
-            //throw new NotImplementedException();
-            var wp = new skedVideo.Player.WrapPlayer();
-            var x = wp.PlayerExists();
-            wp.SettingPlayer();
-
+            //throw new NotImplementedException();           
         }
     }
 }
