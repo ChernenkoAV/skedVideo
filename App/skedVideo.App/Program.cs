@@ -42,11 +42,6 @@ namespace skedVideo.App
                     return;
                 }
 
-                if (args.Any(x => x.StartsWith("/sn:")))
-                    WinServiceInstaller.ServiceName = args.First(x => x.StartsWith("/sn:")).Replace("/sn:", "");
-                else
-                    WinServiceInstaller.ServiceName = null;
-
                 String fileName = Assembly.GetExecutingAssembly().Location;
 
                 #region Установка службы

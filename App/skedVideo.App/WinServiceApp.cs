@@ -2,7 +2,6 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Configuration.Install;
-using System.IO;
 using System.ServiceProcess;
 using System.Threading;
 using Cav;
@@ -15,40 +14,9 @@ namespace skedVideo.Service
     public class WinServiceInstaller : Installer
     {
 
-        public static String DisplayName = "skedVideo Server";
-        public const String Description = "Служба запуска видео по расписанию";
-
-        private const String originalServiceName = "skedVideo";
-        public static String ServiceName
-        {
-            get
-            {
-                String textFile = originalServiceName;
-
-                if (File.Exists(Path.Combine(DomainContext.TempPath, fileNameForServiceName)))
-                    textFile = File.ReadAllText(Path.Combine(DomainContext.TempPath, fileNameForServiceName));
-
-                return textFile.GetNullIfIsNullOrWhiteSpace() ?? originalServiceName;
-            }
-
-            set
-            {
-                var val = value;
-
-                if (File.Exists(Path.Combine(DomainContext.TempPath, fileNameForServiceName)))
-                    File.Delete(Path.Combine(DomainContext.TempPath, fileNameForServiceName));
-
-                if (val.IsNullOrWhiteSpace())
-                    val = originalServiceName;
-                else
-                    val = val.Replace(" ", "").ReplaceInvalidPathChars().SubString(0, 80);
-
-                if (val != originalServiceName)
-                    File.WriteAllText(Path.Combine(DomainContext.TempPath, fileNameForServiceName), value);
-            }
-        }
-
-        private const String fileNameForServiceName = "ServiceName.txt";
+        public static String DisplayName = "skedVideo App Server";
+        public const String Description = "Запуск видео по расписанию";
+        public const String ServiceName = "skedVideo";
 
         public WinServiceInstaller()
         {
@@ -58,9 +26,6 @@ namespace skedVideo.Service
             spi.Account = ServiceAccount.LocalSystem;
             spi.Password = null;
             spi.Username = null;
-
-            if (originalServiceName != ServiceName)
-                DisplayName = DisplayName + " (" + ServiceName + ")";
 
             si.Description = Description;
             si.DisplayName = DisplayName;
