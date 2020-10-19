@@ -22,14 +22,13 @@ namespace skedVideo.App
 
             try
             {
-                Boolean install = args.Any(x => x == "/i");
                 Boolean stop = args.Any(x => x == "/s");
                 Boolean run = args.Any(x => x == "/r");
                 Boolean uninstall = args.Any(x => x == "/u");
+                Boolean update = args.Any(x => x == "/update");
 
                 if (
                     (
-                        Convert.ToInt16(install) +
                         Convert.ToInt16(stop) +
                         Convert.ToInt16(run) +
                         Convert.ToInt16(uninstall)
@@ -46,18 +45,13 @@ namespace skedVideo.App
 
                 #region Установка службы
 
-                if (install)
-                {
-                    if (Manager.ServiceExist(WinServiceInstaller.ServiceName))
-                    {
-                        Console.WriteLine($"Служба '{WinServiceInstaller.ServiceName}' '{WinServiceInstaller.DisplayName}' уже установлена.");
-                        Console.ReadKey();
-                        return;
-                    }
+#if !DEBUG
 
+                if (!Manager.ServiceExist(WinServiceInstaller.ServiceName))
+                {
                     if (!Manager.IsAdmin())
                     {
-                        Manager.RunAsAdmin(fileName, args.JoinValuesToString(" "));
+                        Manager.RunAsAdmin(fileName);
                         return;
                     }
 
@@ -70,6 +64,8 @@ namespace skedVideo.App
 
                     return;
                 }
+
+#endif
 
                 #endregion
 
@@ -164,17 +160,24 @@ namespace skedVideo.App
 
                 #endregion
 
+                #region обновление
+
+                if (update)
+                {
+                    //if ()
+
+                }
+
+                #endregion
+
                 #region Работа в консольном режиме
 
                 Console.WriteLine();
                 Console.WriteLine(WinServiceInstaller.DisplayName);
                 Console.WriteLine();
-                Console.WriteLine("Для установки в качестве службы выполните с параметром /i");
                 Console.WriteLine("Для удаления службы выполните с параметром /u");
                 Console.WriteLine("Для останова службы выполните с параметром /s");
                 Console.WriteLine("Для запуска службы выполните с параметром /r");
-                Console.WriteLine();
-                Console.WriteLine("Указание имени службы: параметр /sn:имя_службы");
                 Console.WriteLine();
                 Console.WriteLine($"Запуск '{WinServiceInstaller.DisplayName}'");
                 var msh = new SkedVideoServiceHost();
