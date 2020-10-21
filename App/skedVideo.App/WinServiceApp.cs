@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Configuration.Install;
 using System.ServiceProcess;
 using System.Threading;
-using Cav;
 using Cav.WinService;
 using skedVideo.BL;
 
@@ -14,7 +13,7 @@ namespace skedVideo.Service
     public class WinServiceInstaller : Installer
     {
 
-        public static String DisplayName = "skedVideo App Server";
+        public static String DisplayName = "skedVideo.AppServer";
         public const String Description = "Запуск видео по расписанию";
         public const String ServiceName = "skedVideo";
 
@@ -48,29 +47,23 @@ namespace skedVideo.Service
 
     public class SkedVideoServiceHost : ServiceBase
     {
-        public SkedVideoServiceHost(String serviceName = null)
+        public SkedVideoServiceHost()
         {
-            if (serviceName.IsNullOrWhiteSpace())
-                serviceName = WinServiceInstaller.ServiceName;
-
-            if (!serviceName.IsNullOrWhiteSpace())
-                ServiceName = serviceName;
-
             this.AutoLog = true;
         }
 
         private CancellationTokenSource cancellSource;
 
-        public void StartNetService()
+        public void StartService()
         {
-            this.StopWebService();
+            this.StopService();
 
             cancellSource = new CancellationTokenSource();
 
             AppRutine.StartApp(cancellSource.Token, this.EventLog);
         }
 
-        public void StopWebService()
+        public void StopService()
         {
             AppRutine.StopApp();
 
@@ -85,12 +78,12 @@ namespace skedVideo.Service
 
         protected override void OnStart(string[] args)
         {
-            StartNetService();
+            StartService();
         }
 
         protected override void OnStop()
         {
-            StopWebService();
+            StopService();
         }
     }
 }
