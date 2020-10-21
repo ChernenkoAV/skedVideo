@@ -9,31 +9,31 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>skedVideo.BL</RootNamespace>
     <AssemblyName>skedVideo.BL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-	<OutputPath>..\..\_App\</OutputPath>
-	<WarningLevel>4</WarningLevel>
-	<PlatformTarget>AnyCPU</PlatformTarget>
-	<Prefer32Bit>false</Prefer32Bit>	
-	<ErrorReport>prompt</ErrorReport>
-	<SignAssembly>true</SignAssembly>
+    <OutputPath>..\..\_App\</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ErrorReport>prompt</ErrorReport>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>sqn.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-  <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>    
-    <DefineConstants>DEBUG;TRACE</DefineConstants>    
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>    
+    <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
-  </PropertyGroup>  
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cav.Core, Version=6.4.0.0, Culture=neutral, PublicKeyToken=f136b1fd0b87e3f0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Cav.Core.6.4.0\lib\net461\Cav.Core.dll</HintPath>
+    <Reference Include="Cav.Core, Version=6.4.1.0, Culture=neutral, PublicKeyToken=f136b1fd0b87e3f0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Cav.Core.6.4.1\lib\net461\Cav.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -55,9 +55,17 @@
     <None Include="sqn.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\skedVideo.Common\skedVideo.Common.csproj">
+      <Project>{ced5c772-bb92-43cd-bca1-8a848ea72bc8}</Project>
+      <Name>skedVideo.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\skedVideo.Player\skedVideo.Player.csproj">
       <Project>{9d550fa4-8401-432f-844d-99d8e9966263}</Project>
       <Name>skedVideo.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\skedVideo.UpdateApp\skedVideo.UpdateApp.csproj">
+      <Project>{cc073757-6e58-4b62-93c2-1af8dde5fad4}</Project>
+      <Name>skedVideo.UpdateApp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,8 +5,8 @@ using System.ServiceModel;
 using System.ServiceProcess;
 using Cav;
 using Cav.WinService;
-using skedVideo.Common;
 using skedVideo.Service;
+using skedVideo.UpdateApp;
 
 namespace skedVideo.App
 {
@@ -31,7 +31,7 @@ namespace skedVideo.App
 
 #if !DEBUG
 
-                if (!Manager.ServiceExist(WinServiceInstaller.ServiceName))
+                if (!Manager.ServiceExist(Settings.ServiceName))
                 {
                     if (!Manager.IsAdmin())
                     {
@@ -39,12 +39,12 @@ namespace skedVideo.App
                         return;
                     }
 
-                    Console.WriteLine($"Установка службы '{WinServiceInstaller.DisplayName}'");
+                    Console.WriteLine($"Установка службы '{Settings.ServiceDisplayName}'");
                     Console.WriteLine();
                     Manager.InstallAsService(fileName);
-                    Console.WriteLine($"Запуск службы '{WinServiceInstaller.DisplayName}'");
+                    Console.WriteLine($"Запуск службы '{Settings.ServiceDisplayName}'");
                     Console.WriteLine();
-                    Manager.StartService(WinServiceInstaller.ServiceName);
+                    Manager.StartService(Settings.ServiceName);
 
                     return;
                 }
@@ -57,7 +57,7 @@ namespace skedVideo.App
 
                 if (uninstall)
                 {
-                    if (!Manager.ServiceExist(WinServiceInstaller.ServiceName))
+                    if (!Manager.ServiceExist(Settings.ServiceName))
                         return;
 
                     if (!Manager.IsAdmin())
@@ -69,12 +69,12 @@ namespace skedVideo.App
 
                     Console.WriteLine("Попытка останова службы.");
                     Console.WriteLine();
-                    Manager.StopService(WinServiceInstaller.ServiceName);
+                    Manager.StopService(Settings.ServiceName);
                     Console.WriteLine("Удаление службы.");
                     Console.WriteLine();
                     Manager.UninstallService(fileName);
 
-                    if (Manager.ServiceExist(WinServiceInstaller.ServiceName))
+                    if (Manager.ServiceExist(Settings.ServiceName))
                     {
                         Console.WriteLine("Внимание! Служба была помечена на удаление. Необходимо перезагрузить компьютер.");
                         Console.WriteLine();
@@ -90,8 +90,10 @@ namespace skedVideo.App
 
                 if (update)
                 {
-
-
+                    var targetFile = args[1];
+                    var ubl = new UpdaterBL(Settings.ServiceName);
+                    ubl.UpdateStep2(targetFile);
+                    return;
                 }
 
                 #endregion
@@ -99,11 +101,11 @@ namespace skedVideo.App
                 #region Работа в консольном режиме
 
                 Console.WriteLine();
-                Console.WriteLine(WinServiceInstaller.DisplayName);
+                Console.WriteLine(Settings.ServiceDisplayName);
                 Console.WriteLine();
                 Console.WriteLine("Для удаления службы выполните с параметром /u");
                 Console.WriteLine();
-                Console.WriteLine($"Запуск '{WinServiceInstaller.DisplayName}'");
+                Console.WriteLine($"Запуск '{Settings.ServiceDisplayName}'");
                 var msh = new SkedVideoServiceHost();
                 try
                 {
@@ -130,12 +132,12 @@ namespace skedVideo.App
                     msh.StartService();
                 }
 
-                Console.WriteLine($"'{WinServiceInstaller.DisplayName}' запущен.");
+                Console.WriteLine($"'{Settings.ServiceDisplayName}' запущен.");
                 Console.WriteLine();
                 Console.WriteLine("Для останова нажмите Enter.");
                 while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
                 Console.WriteLine();
-                Console.WriteLine($"Останов '{WinServiceInstaller.DisplayName}'");
+                Console.WriteLine($"Останов '{Settings.ServiceDisplayName}'");
                 msh.StopService();
 
                 #endregion
@@ -145,7 +147,7 @@ namespace skedVideo.App
                 Console.WriteLine();
                 Console.WriteLine(ex.Expand());
                 Console.WriteLine();
-                Console.WriteLine($"'{WinServiceInstaller.DisplayName}' остановлен");
+                Console.WriteLine($"'{Settings.ServiceDisplayName}' остановлен");
                 Console.WriteLine("Для выхода нажмите Enter.");
                 Console.ReadLine();
             }

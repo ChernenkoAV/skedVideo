@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net;
 using System.Threading;
 
 namespace skedVideo.BL
@@ -12,7 +13,10 @@ namespace skedVideo.BL
 
         public static void StartApp(CancellationToken token, EventLog eventLog)
         {
-            //throw new NotImplementedException();           
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+
+            //throw new NotImplementedException();  
+
         }
     }
 }
