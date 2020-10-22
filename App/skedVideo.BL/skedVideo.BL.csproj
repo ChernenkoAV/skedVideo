@@ -36,8 +36,14 @@
       <HintPath>..\..\packages\Cav.Core.6.4.1\lib\net461\Cav.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,26 +52,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Player\PlayerData.cs" />
+    <Compile Include="Player\WrapPlayer.cs" />
+    <Compile Include="AppUpdaterBL.cs" />
     <Compile Include="_AppRutine.cs" />
     <Compile Include="InstallRutine\InstallContsts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="sqn.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\skedVideo.Common\skedVideo.Common.csproj">
       <Project>{ced5c772-bb92-43cd-bca1-8a848ea72bc8}</Project>
       <Name>skedVideo.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\skedVideo.Player\skedVideo.Player.csproj">
-      <Project>{9d550fa4-8401-432f-844d-99d8e9966263}</Project>
-      <Name>skedVideo.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\skedVideo.UpdateApp\skedVideo.UpdateApp.csproj">
-      <Project>{cc073757-6e58-4b62-93c2-1af8dde5fad4}</Project>
-      <Name>skedVideo.UpdateApp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

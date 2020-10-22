@@ -1,6 +1,6 @@
 ﻿namespace skedVideo.Player
 {
-    internal static class Settings
+    internal static class PlayerSettings
     {
         /// <summary>
         /// Путь к установленному плееру MPC-HC
@@ -35,5 +35,22 @@
         /// </summary>
         public const string Player_Setting_LogoFile = "LogoFile";
 
+    }
+
+}
+
+namespace skedVideo.BL
+{
+    public class PlayerStatus
+    {
+        public string FilePath { get; set; }
+        public StateKind State { get; set; }
+    }
+
+    public enum StateKind
+    {
+        Stop = 0,
+        Pause = 1,
+        Play = 2
     }
 }

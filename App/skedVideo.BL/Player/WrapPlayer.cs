@@ -7,14 +7,15 @@ using System.Xml.Linq;
 using Cav;
 using Microsoft.Win32;
 using RestSharp;
+using skedVideo.Player;
 
-namespace skedVideo.Player
+namespace skedVideo.BL
 {
-    public class WrapPlayer
+    public class WrapPlayerBL
     {
         public bool PlayerExists()
         {
-            return File.Exists(Settings.Player_Path);
+            return File.Exists(PlayerSettings.Player_Path);
         }
 
         private int webPort;
@@ -44,29 +45,29 @@ namespace skedVideo.Player
 
         public void SettingPlayer()
         {
-            int isEnableWS = (int)Registry.GetValue(Settings.Player_Setting_RegSetting, Settings.Player_Setiing_WebServerEnable, 0);
+            int isEnableWS = (int)Registry.GetValue(PlayerSettings.Player_Setting_RegSetting, PlayerSettings.Player_Setiing_WebServerEnable, 0);
 
             if (isEnableWS != 1)
-                Registry.SetValue(Settings.Player_Setting_RegSetting, Settings.Player_Setiing_WebServerEnable, 1, RegistryValueKind.DWord);
+                Registry.SetValue(PlayerSettings.Player_Setting_RegSetting, PlayerSettings.Player_Setiing_WebServerEnable, 1, RegistryValueKind.DWord);
 
-            webPort = (int)Registry.GetValue(Settings.Player_Setting_RegSetting, Settings.Player_Setting_WebServerPort, 0);
+            webPort = (int)Registry.GetValue(PlayerSettings.Player_Setting_RegSetting, PlayerSettings.Player_Setting_WebServerPort, 0);
             if (webPort == 0)
             {
                 webPort = 13579;
-                Registry.SetValue(Settings.Player_Setting_RegSetting, Settings.Player_Setting_WebServerPort, webPort, RegistryValueKind.DWord);
+                Registry.SetValue(PlayerSettings.Player_Setting_RegSetting, PlayerSettings.Player_Setting_WebServerPort, webPort, RegistryValueKind.DWord);
             }
 
-            var onlyLocal = (int)Registry.GetValue(Settings.Player_Setting_RegSetting, Settings.Player_Setting_WebServerLocalhostOnly, 0);
+            var onlyLocal = (int)Registry.GetValue(PlayerSettings.Player_Setting_RegSetting, PlayerSettings.Player_Setting_WebServerLocalhostOnly, 0);
             if (onlyLocal != 1)
-                Registry.SetValue(Settings.Player_Setting_RegSetting, Settings.Player_Setting_WebServerLocalhostOnly, 1, RegistryValueKind.DWord);
+                Registry.SetValue(PlayerSettings.Player_Setting_RegSetting, PlayerSettings.Player_Setting_WebServerLocalhostOnly, 1, RegistryValueKind.DWord);
 
-            var exitFullscreen = (int)Registry.GetValue(Settings.Player_Setting_RegSetting, Settings.Player_Setting_ExitFullscreenAtTheEnd, 0);
+            var exitFullscreen = (int)Registry.GetValue(PlayerSettings.Player_Setting_RegSetting, PlayerSettings.Player_Setting_ExitFullscreenAtTheEnd, 0);
             if (exitFullscreen != 0)
-                Registry.SetValue(Settings.Player_Setting_RegSetting, Settings.Player_Setting_ExitFullscreenAtTheEnd, 0, RegistryValueKind.DWord);
+                Registry.SetValue(PlayerSettings.Player_Setting_RegSetting, PlayerSettings.Player_Setting_ExitFullscreenAtTheEnd, 0, RegistryValueKind.DWord);
 
-            var launchFullScreen = (int)Registry.GetValue(Settings.Player_Setting_RegSetting, Settings.Player_Setting_LaunchFullScreen, 0);
+            var launchFullScreen = (int)Registry.GetValue(PlayerSettings.Player_Setting_RegSetting, PlayerSettings.Player_Setting_LaunchFullScreen, 0);
             if (launchFullScreen != 1)
-                Registry.SetValue(Settings.Player_Setting_RegSetting, Settings.Player_Setting_LaunchFullScreen, 1, RegistryValueKind.DWord);
+                Registry.SetValue(PlayerSettings.Player_Setting_RegSetting, PlayerSettings.Player_Setting_LaunchFullScreen, 1, RegistryValueKind.DWord);
 
         }
 
@@ -79,7 +80,7 @@ namespace skedVideo.Player
             var res = execRequest(req);
 
             if (res.StatusCode == 0)
-                Process.Start(Settings.Player_Path, $"\"{path}\"");
+                Process.Start(PlayerSettings.Player_Path, $"\"{path}\"");
 
             while (GetStatus().State != StateKind.Play)
             { }

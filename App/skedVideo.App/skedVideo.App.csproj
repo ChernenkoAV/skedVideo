@@ -69,10 +69,6 @@
       <Project>{CED5C772-BB92-43CD-BCA1-8A848EA72BC8}</Project>
       <Name>skedVideo.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\skedVideo.UpdateApp\skedVideo.UpdateApp.csproj">
-      <Project>{cc073757-6e58-4b62-93c2-1af8dde5fad4}</Project>
-      <Name>skedVideo.UpdateApp</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
