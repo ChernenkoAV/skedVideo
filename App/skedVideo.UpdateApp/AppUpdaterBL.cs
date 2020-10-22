@@ -81,12 +81,47 @@ namespace skedVideo.UpdateApp
             Utils.DeleteDirectory(tempDirFromrepo);
 
             var fileName = Assembly.GetEntryAssembly().Location;
-            Manager.RunAsAdmin(Path.Combine(tempNewBin, Path.GetFileName(fileName)), $"/update \"{fileName}\"");
+            Process.Start(Path.Combine(tempNewBin, Path.GetFileName(fileName)), $"/update \"{fileName}\"");
         }
 
         public void UpdateStep2(string targetFileName)
         {
+            Manager.StopService(serviceName);
 
+            var sourcePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            var targetPath = Path.GetDirectoryName(targetFileName);
+
+            var oldFiles = new DirectoryInfo(targetPath).GetFileSystemInfos("*.*", SearchOption.TopDirectoryOnly);
+
+            foreach (var of in oldFiles)
+            {
+                if ((of.Attributes & FileAttributes.Directory) == FileAttributes.Directory)
+                {
+                    Utils.DeleteDirectory(of.FullName);
+                    continue;
+                }
+
+                if (File.Exists(of.FullName))
+                    File.Delete(of.FullName);
+
+            }
+
+            new DirectoryInfo(sourcePath).GetFileSystemInfos("*.*", SearchOption.AllDirectories)
+                .ToList()
+                .ForEach(fn =>
+                {
+                    var targFn = fn.FullName.Replace(sourcePath, targetPath);
+
+                    if ((fn.Attributes & FileAttributes.Directory) == FileAttributes.Directory)
+                    {
+                        Directory.CreateDirectory(targFn);
+                        return;
+                    }
+
+                    File.Copy(fn.FullName, targFn);
+                });
+
+            Manager.StartService(serviceName);
         }
 
     }

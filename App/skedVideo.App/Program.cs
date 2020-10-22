@@ -14,12 +14,6 @@ namespace skedVideo.App
     {
         static void Main(string[] args)
         {
-            if (!Environment.UserInteractive)
-            {
-                ServiceBase.Run(new SkedVideoServiceHost());
-                return;
-            }
-
             try
             {
                 Boolean uninstall = args.Any(x => x == "/uninstall");
@@ -30,8 +24,7 @@ namespace skedVideo.App
                 #region Установка службы
 
 #if !DEBUG
-
-                if (!Manager.ServiceExist(Settings.ServiceName))
+                if (Environment.UserInteractive && !Manager.ServiceExist(Settings.ServiceName))
                 {
                     if (!Manager.IsAdmin())
                     {
@@ -99,11 +92,16 @@ namespace skedVideo.App
                 #endregion
 
                 #region Работа в консольном режиме
+                if (!Environment.UserInteractive)
+                {
+                    ServiceBase.Run(new SkedVideoServiceHost());
+                    return;
+                }
 
                 Console.WriteLine();
                 Console.WriteLine(Settings.ServiceDisplayName);
                 Console.WriteLine();
-                Console.WriteLine("Для удаления службы выполните с параметром /u");
+                Console.WriteLine("Для удаления службы выполните с параметром /uninstall");
                 Console.WriteLine();
                 Console.WriteLine($"Запуск '{Settings.ServiceDisplayName}'");
                 var msh = new SkedVideoServiceHost();

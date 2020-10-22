@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Configuration.Install;
 using System.ServiceProcess;
 using System.Threading;
@@ -28,14 +27,6 @@ namespace skedVideo.Service
             this.Installers.Add(spi);
             this.Installers.Add(si);
             this.AfterInstall += (a, b) => Manager.AddEventView(Settings.ServiceName, Settings.ServiceDisplayName, Settings.ServiceDescription);
-        }
-
-        protected override void OnBeforeInstall(IDictionary savedState)
-        {
-            var assemblyPath = Context.Parameters["assemblypath"];
-            assemblyPath = $"\"{assemblyPath}\" {Settings.ServiceName}";
-            Context.Parameters["assemblypath"] = assemblyPath;
-            base.OnBeforeInstall(savedState);
         }
     }
 

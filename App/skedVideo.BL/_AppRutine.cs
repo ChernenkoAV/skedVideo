@@ -8,15 +8,25 @@ namespace skedVideo.BL
     {
         public static void StopApp()
         {
-            //throw new NotImplementedException();
+
         }
 
         public static void StartApp(CancellationToken token, EventLog eventLog)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
-            //throw new NotImplementedException();  
 
+
+            //Task.Run(() =>
+            //{
+            //    Thread.Sleep(10000);
+            //    var ubl = new UpdaterBL(Settings.ServiceName);
+
+            //    if (!ubl.ExistsNewVersion())
+            //        return;
+
+            //    ubl.UpdateStep1();
+            //});
         }
     }
 }
