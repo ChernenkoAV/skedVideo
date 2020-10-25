@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using Cav;
 using Cav.WinService;
 using RestSharp;
+using skedVideo.BL;
+using skedVideo.BL.InstallRutine;
 
 namespace skedVideo.UpdateApp
 {
@@ -122,6 +127,51 @@ namespace skedVideo.UpdateApp
                 });
 
             Manager.StartService(serviceName);
+        }
+
+        public static void VisitSystemComponents(CancellationToken token)
+        {
+
+            if (WrapPlayerBL.PlayerExists())
+                return;
+
+            var processExitCode = Process.Start("choco").ExitCode;
+            if (processExitCode != 1)
+                processExitCode = Process.Start(InstallContsts.Chocolatey_InstalCmd).ExitCode;
+
+            if (processExitCode != 0)
+                throw new Exception("уставновка chocolatley неуспешна. Установите вручную.");
+
+            if (!WrapPlayerBL.PlayerExists())
+                processExitCode = Process.Start(InstallContsts.Klite_InstalCmd).ExitCode;
+
+            if (processExitCode != 0)
+                throw new Exception("уставновка K-Lite Codec Pack неуспешна. Установите K-Lite Codec Pack вручную редакции не ниже Standard.");
+
+            //Запуск потока проверки обновления
+            new Task(() =>
+                {
+                    var day = DateTime.Now.Day;
+
+                    while (!token.IsCancellationRequested)
+                    {
+                        Task.Delay(TimeSpan.FromMinutes(1), token).ContinueWith((a) => { }).GetAwaiter().GetResult();
+
+                        if (day == DateTime.Now.Day)
+                            continue;
+
+                        day = DateTime.Now.Day;
+
+                        var ubl = new UpdaterBL(Settings.ServiceName);
+
+                        if (!ubl.ExistsNewVersion())
+                            continue;
+
+                        ubl.UpdateStep1();
+                    }
+                },
+                creationOptions: TaskCreationOptions.LongRunning)
+            .Start();
         }
 
     }

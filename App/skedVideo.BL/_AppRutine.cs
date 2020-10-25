@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Net;
 using System.Threading;
+using skedVideo.UpdateApp;
 
 namespace skedVideo.BL
 {
@@ -15,18 +16,7 @@ namespace skedVideo.BL
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
-
-
-            //Task.Run(() =>
-            //{
-            //    Thread.Sleep(10000);
-            //    var ubl = new UpdaterBL(Settings.ServiceName);
-
-            //    if (!ubl.ExistsNewVersion())
-            //        return;
-
-            //    ubl.UpdateStep1();
-            //});
+            UpdaterBL.VisitSystemComponents(token);
         }
     }
 }

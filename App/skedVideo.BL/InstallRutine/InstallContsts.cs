@@ -12,6 +12,6 @@
         /// <summary>
         /// Команда установки пакета k-lite
         /// </summary>
-        public const string Klite_InstalCmd = "choco install k-litecodecpackfull";
+        public const string Klite_InstalCmd = @"choco install k-litecodecpackfull /y";
     }
 }

@@ -13,7 +13,7 @@ namespace skedVideo.BL
 {
     public class WrapPlayerBL
     {
-        public bool PlayerExists()
+        public static bool PlayerExists()
         {
             return File.Exists(PlayerSettings.Player_Path);
         }
