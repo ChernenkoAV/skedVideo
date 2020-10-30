@@ -135,37 +135,51 @@ namespace skedVideo.UpdateApp
             if (WrapPlayerBL.PlayerExists())
                 return;
 
-            var processExitCode = Process.Start("choco").ExitCode;
-            if (processExitCode != 1)
-                processExitCode = Process.Start(InstallContsts.Chocolatey_InstalCmd).ExitCode;
+            var pr = Process.Start("choco");
+            pr.WaitForExit();
+            var processExitCode = pr.ExitCode;
 
-            if (processExitCode != 0)
-                throw new Exception("уставновка chocolatley неуспешна. Установите вручную.");
+            if (processExitCode != 1)
+            {
+                pr = Process.Start(InstallContsts.Chocolatey_InstalCmd);
+                pr.WaitForExit();
+                processExitCode = pr.ExitCode;
+
+                if (processExitCode != 0)
+                    throw new Exception("уставновка chocolatley неуспешна. Установите вручную.");
+            }
 
             if (!WrapPlayerBL.PlayerExists())
-                processExitCode = Process.Start(InstallContsts.Klite_InstalCmd).ExitCode;
+            {
+                pr = Process.Start(InstallContsts.Klite_InstalCmd);
+                pr.WaitForExit();
+                processExitCode = pr.ExitCode;
 
-            if (processExitCode != 0)
-                throw new Exception("уставновка K-Lite Codec Pack неуспешна. Установите K-Lite Codec Pack вручную редакции не ниже Standard.");
+                if (processExitCode != 0)
+                    throw new Exception("уставновка K-Lite Codec Pack неуспешна. Установите K-Lite Codec Pack вручную редакции не ниже Standard.");
+            }
+
+
+            new UpdaterBL(Settings.ServiceName).ExistsNewVersion();
 
             //Запуск потока проверки обновления
             new Task(() =>
                 {
                     var day = DateTime.Now.Day;
 
+                    var ubl = new UpdaterBL(Settings.ServiceName);
+
                     while (!token.IsCancellationRequested)
                     {
-                        Task.Delay(TimeSpan.FromMinutes(1), token).ContinueWith((a) => { }).GetAwaiter().GetResult();
+                        Task.Delay(TimeSpan.FromMinutes(15), token).ContinueWith((a) => { }).GetAwaiter().GetResult();
 
-                        if (day == DateTime.Now.Day)
-                            continue;
-
-                        day = DateTime.Now.Day;
-
-                        var ubl = new UpdaterBL(Settings.ServiceName);
+                        //if (day == DateTime.Now.Day)
+                        //    continue;
 
                         if (!ubl.ExistsNewVersion())
                             continue;
+
+                        day = DateTime.Now.Day;
 
                         ubl.UpdateStep1();
                     }
