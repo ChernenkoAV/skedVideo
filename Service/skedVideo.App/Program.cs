@@ -91,12 +91,17 @@ namespace skedVideo.App
 
                 #endregion
 
-                #region Работа в консольном режиме
+                #region Запуск службы
+
                 if (!Environment.UserInteractive)
                 {
                     ServiceBase.Run(new SkedVideoServiceHost());
                     return;
                 }
+
+                #endregion
+
+                #region Работа в консольном режиме
 
                 Console.WriteLine();
                 Console.WriteLine(Settings.ServiceDisplayName);

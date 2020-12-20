@@ -131,62 +131,83 @@ namespace skedVideo.UpdateApp
 
         public static void VisitSystemComponents(CancellationToken token)
         {
-
-            if (WrapPlayerBL.PlayerExists())
-                return;
-
-            var pr = Process.Start("choco");
-            pr.WaitForExit();
-            var processExitCode = pr.ExitCode;
-
-            if (processExitCode != 1)
+            try
             {
-                pr = Process.Start(InstallContsts.Chocolatey_InstalCmd);
-                pr.WaitForExit();
-                processExitCode = pr.ExitCode;
+                if (WrapPlayerBL.PlayerExists())
+                    return;
 
-                if (processExitCode != 0)
-                    throw new Exception("уставновка chocolatley неуспешна. Установите вручную.");
-            }
-
-            if (!WrapPlayerBL.PlayerExists())
-            {
-                pr = Process.Start(InstallContsts.Klite_InstalCmd);
-                pr.WaitForExit();
-                processExitCode = pr.ExitCode;
-
-                if (processExitCode != 0)
-                    throw new Exception("уставновка K-Lite Codec Pack неуспешна. Установите K-Lite Codec Pack вручную редакции не ниже Standard.");
-            }
-
-
-            new UpdaterBL(Settings.ServiceName).ExistsNewVersion();
-
-            //Запуск потока проверки обновления
-            new Task(() =>
+                Process pr = null;
+                int processExitCode = -1;
+                try
                 {
-                    var day = DateTime.Now.Day;
+                    "Проверка установки chocolatley".AddInformation();
+                    pr = Process.Start("cmd.exe /c choco /?");
+                    pr.WaitForExit();
+                    processExitCode = pr.ExitCode;
+                }
+                catch
+                {
+                    "Похоже, chocolatley не установлен".AddInformation();
+                }
 
-                    var ubl = new UpdaterBL(Settings.ServiceName);
+                if (processExitCode != 0)
+                {
+                    "Установка chocolatley".AddInformation();
 
-                    while (!token.IsCancellationRequested)
+                    pr = Process.Start("cmd.exe /c " + InstallContsts.Chocolatey_InstalCmd);
+                    pr.WaitForExit();
+                    processExitCode = pr.ExitCode;
+
+                    if (processExitCode != 0)
+                        throw new Exception("уставновка chocolatley неуспешна. Установите вручную.");
+                }
+
+                "chocolatley уствновлен".AddInformation();
+                "уставновка K-Lite Codec Pack".AddInformation();
+
+                if (!WrapPlayerBL.PlayerExists())
+                {
+                    pr = Process.Start("cmd.exe /c " + InstallContsts.Klite_InstalCmd);
+                    pr.WaitForExit();
+                    processExitCode = pr.ExitCode;
+
+                    if (processExitCode != 0)
+                        throw new Exception("уставновка K-Lite Codec Pack неуспешна. Установите K-Lite Codec Pack вручную редакции не ниже Standard.");
+                }
+
+                "K-Lite Codec Pack установлен".AddInformation();
+
+                //Запуск потока проверки обновления
+                new Task(() =>
                     {
-                        Task.Delay(TimeSpan.FromMinutes(15), token).ContinueWith((a) => { }).GetAwaiter().GetResult();
+                        var day = DateTime.Now.Day;
 
-                        //if (day == DateTime.Now.Day)
-                        //    continue;
+                        var ubl = new UpdaterBL(Settings.ServiceName);
 
-                        if (!ubl.ExistsNewVersion())
-                            continue;
+                        while (!token.IsCancellationRequested)
+                        {
+                            Task.Delay(TimeSpan.FromMinutes(15), token).ContinueWith((a) => { }).GetAwaiter().GetResult();
 
-                        day = DateTime.Now.Day;
+                            //if (day == DateTime.Now.Day)
+                            //    continue;
 
-                        ubl.UpdateStep1();
-                    }
-                },
-                creationOptions: TaskCreationOptions.LongRunning)
-            .Start();
+                            if (!ubl.ExistsNewVersion())
+                                continue;
+
+                            day = DateTime.Now.Day;
+
+                            ubl.UpdateStep1();
+                        }
+                    },
+                    creationOptions: TaskCreationOptions.LongRunning)
+                .Start();
+            }
+            catch (Exception ex)
+            {
+                ex.AddError();
+            }
         }
+
 
     }
 }

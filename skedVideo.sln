@@ -3,17 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{7FACD905-2A64-4FA0-AF45-A5C91B604B80}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{7FACD905-2A64-4FA0-AF45-A5C91B604B80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.App", "App\skedVideo.App\skedVideo.App.csproj", "{1EB271E7-FFFE-4F10-9C4F-DA7B9AF52782}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.App", "service\skedVideo.App\skedVideo.App.csproj", "{1EB271E7-FFFE-4F10-9C4F-DA7B9AF52782}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.BL", "App\skedVideo.BL\skedVideo.BL.csproj", "{7FB4D757-933D-460E-AEC1-FB92446E3FC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.BL", "service\skedVideo.BL\skedVideo.BL.csproj", "{7FB4D757-933D-460E-AEC1-FB92446E3FC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Net", "App\skedVideo.Net\skedVideo.Net.csproj", "{48B8995E-C854-4722-8DBE-C68B8EBCB715}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Net", "service\skedVideo.Net\skedVideo.Net.csproj", "{48B8995E-C854-4722-8DBE-C68B8EBCB715}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Common", "App\skedVideo.Common\skedVideo.Common.csproj", "{CED5C772-BB92-43CD-BCA1-8A848EA72BC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Common", "service\skedVideo.Common\skedVideo.Common.csproj", "{CED5C772-BB92-43CD-BCA1-8A848EA72BC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Dal", "App\skedVideo.Dal\skedVideo.Dal.csproj", "{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Dal", "service\skedVideo.Dal\skedVideo.Dal.csproj", "{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{726ABC1E-AA45-4D67-A57D-24D3708FD154}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tray", "tray", "{A4AFDBC8-16CC-4944-8BC4-4C21CBA29569}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.tray", "tray\skedVideo.tray\skedVideo.tray.csproj", "{687CBD58-7BF7-4BDA-BDA9-E93DEE9AB6CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skedVideo.Common", "Common\skedVideo.Common\skedVideo.Common.csproj", "{55F62BB4-BF7C-4867-AA7E-2038B6D6430D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +49,14 @@ Global
 		{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687CBD58-7BF7-4BDA-BDA9-E93DEE9AB6CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687CBD58-7BF7-4BDA-BDA9-E93DEE9AB6CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687CBD58-7BF7-4BDA-BDA9-E93DEE9AB6CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687CBD58-7BF7-4BDA-BDA9-E93DEE9AB6CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55F62BB4-BF7C-4867-AA7E-2038B6D6430D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55F62BB4-BF7C-4867-AA7E-2038B6D6430D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55F62BB4-BF7C-4867-AA7E-2038B6D6430D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55F62BB4-BF7C-4867-AA7E-2038B6D6430D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,5 +67,7 @@ Global
 		{48B8995E-C854-4722-8DBE-C68B8EBCB715} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
 		{CED5C772-BB92-43CD-BCA1-8A848EA72BC8} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
 		{9D015B01-52D4-4A98-BCB9-9C0407AC3F8F} = {7FACD905-2A64-4FA0-AF45-A5C91B604B80}
+		{687CBD58-7BF7-4BDA-BDA9-E93DEE9AB6CF} = {A4AFDBC8-16CC-4944-8BC4-4C21CBA29569}
+		{55F62BB4-BF7C-4867-AA7E-2038B6D6430D} = {726ABC1E-AA45-4D67-A57D-24D3708FD154}
 	EndGlobalSection
 EndGlobal

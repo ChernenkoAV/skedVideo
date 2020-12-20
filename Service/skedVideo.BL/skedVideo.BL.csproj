@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CED5C772-BB92-43CD-BCA1-8A848EA72BC8}</ProjectGuid>
+    <ProjectGuid>{7FB4D757-933D-460E-AEC1-FB92446E3FC3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>skedVideo.Common</RootNamespace>
-    <AssemblyName>skedVideo.Common</AssemblyName>
+    <RootNamespace>skedVideo.BL</RootNamespace>
+    <AssemblyName>skedVideo.BL</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <OutputPath>..\..\_App\</OutputPath>
@@ -32,16 +32,18 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cav.Core, Version=6.4.1.0, Culture=neutral, PublicKeyToken=f136b1fd0b87e3f0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Cav.Core.6.4.1\lib\net461\Cav.Core.dll</HintPath>
+    <Reference Include="Cav.Core, Version=6.4.2.0, Culture=neutral, PublicKeyToken=f136b1fd0b87e3f0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Cav.Core.6.4.2\lib\net461\Cav.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,14 +52,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JsonRutine\JsonExtention.cs" />
-    <Compile Include="JsonRutine\JsonSettings.cs" />
+    <Compile Include="Player\PlayerData.cs" />
+    <Compile Include="Player\WrapPlayer.cs" />
+    <Compile Include="AppUpdaterBL.cs" />
+    <Compile Include="_AppRutine.cs" />
+    <Compile Include="InstallRutine\InstallContsts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="sqn.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\skedVideo.Common\skedVideo.Common.csproj">
+      <Project>{ced5c772-bb92-43cd-bca1-8a848ea72bc8}</Project>
+      <Name>skedVideo.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
