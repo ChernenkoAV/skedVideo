@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Cav;
 using Cav.WinService;
 using RestSharp;
+using skedVideo;
 using skedVideo.BL;
 using skedVideo.BL.InstallRutine;
 
