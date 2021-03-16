@@ -32,8 +32,8 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cav.Core, Version=6.4.2.0, Culture=neutral, PublicKeyToken=f136b1fd0b87e3f0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Cav.Core.6.4.3\lib\net461\Cav.Core.dll</HintPath>
+    <Reference Include="Cav.Core, Version=6.7.1.0, Culture=neutral, PublicKeyToken=f136b1fd0b87e3f0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Cav.Core.6.7.1\lib\net461\Cav.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

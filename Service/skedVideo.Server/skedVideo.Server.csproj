@@ -47,8 +47,8 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cav.Core, Version=6.4.3.0, Culture=neutral, PublicKeyToken=f136b1fd0b87e3f0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Cav.Core.6.4.3\lib\net461\Cav.Core.dll</HintPath>
+    <Reference Include="Cav.Core, Version=6.7.1.0, Culture=neutral, PublicKeyToken=f136b1fd0b87e3f0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Cav.Core.6.7.1\lib\net461\Cav.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -72,7 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="sqn.pfx" />
   </ItemGroup>
   <ItemGroup>

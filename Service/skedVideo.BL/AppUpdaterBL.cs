@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Cav;
 using Cav.WinService;
 using RestSharp;
-using skedVideo;
+using skedVideo.Bl.Mpc;
 using skedVideo.BL;
 using skedVideo.BL.InstallRutine;
 
@@ -134,7 +134,7 @@ namespace skedVideo.UpdateApp
         {
             try
             {
-                if (WrapPlayerBL.PlayerExists())
+                if (MpcClient.PlayerExists())
                     return;
 
                 Process pr = null;
@@ -166,7 +166,7 @@ namespace skedVideo.UpdateApp
                 "chocolatley уствновлен".AddInformation();
                 "уставновка K-Lite Codec Pack".AddInformation();
 
-                if (!WrapPlayerBL.PlayerExists())
+                if (!MpcClient.PlayerExists())
                 {
                     pr = Process.Start("cmd.exe /c " + InstallContsts.Klite_InstalCmd);
                     pr.WaitForExit();

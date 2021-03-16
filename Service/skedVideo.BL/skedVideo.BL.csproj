@@ -32,8 +32,12 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cav.Core, Version=6.4.3.0, Culture=neutral, PublicKeyToken=f136b1fd0b87e3f0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Cav.Core.6.4.3\lib\net461\Cav.Core.dll</HintPath>
+    <Reference Include="Cav.Core, Version=6.7.1.0, Culture=neutral, PublicKeyToken=f136b1fd0b87e3f0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Cav.Core.6.7.1\lib\net461\Cav.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.31.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HtmlAgilityPack.1.11.31\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
@@ -52,8 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Player\PlayerData.cs" />
-    <Compile Include="Player\WrapPlayer.cs" />
+    <Compile Include="Mpc\DtoTypes.cs" />
+    <Compile Include="Mpc\MpcClient.cs" />
     <Compile Include="AppUpdaterBl.cs" />
     <Compile Include="_AppRutine.cs" />
     <Compile Include="InstallRutine\InstallContsts.cs" />
