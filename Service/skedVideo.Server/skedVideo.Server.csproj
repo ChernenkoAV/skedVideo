@@ -78,7 +78,7 @@
     <None Include="sqn.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\skedVideo.Common\skedVideo.Common.csproj">
+    <ProjectReference Include="..\..\skedVideo.Common\skedVideo.Common.csproj">
       <Project>{55F62BB4-BF7C-4867-AA7E-2038B6D6430D}</Project>
       <Name>skedVideo.Common</Name>
     </ProjectReference>
